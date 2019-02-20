@@ -1,0 +1,127 @@
+.container-fluid
+  .row
+    %nav.navbar.navbar-default{:role => "navigation"}
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse{:style => "background-color: #b9ccef"}
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => "#"}
+              %i.fa.fa-home{"aria-hidden" => "true"}>
+              Dashboard
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.fa.fa-calendar-check-o{"aria-hidden" => "true"}>
+              Calendar
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Action
+              %li
+                %a{:href => "#"} Another action
+              %li
+                %a{:href => "#"} Something else here
+              %li.divider
+              %li
+                %a{:href => "#"} Separated link
+              %li.divider
+              %li
+                %a{:href => "#"} One more separated link
+          %li
+            %form.navbar-form.navbar-left{:role => "search"}
+              .input-group
+                %input.form-control{:placeholder => "Search", :type => "text"}/
+                %span.input-group-btn
+                  %button.btn.btn-primary{:type => "button"}
+                    Go!
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.fa.fa-user{"aria-hidden" => "true"}>
+              Admin
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                = link_to  destroy_user_session_path do
+                  %span.glyphicon.glyphicon-user Profile
+              %li
+                %a{:href => "#"}
+                  %span.glyphicon.glyphicon-cog>
+                  Settings
+              %li.divider
+              %li
+                = link_to  destroy_user_session_path, method: :delete do
+                  %span.glyphicon.glyphicon-log-out Logout
+      / /.navbar-collapse
+  .row{:style => "padding: 0;margin: auto;"}
+    .col-md-12
+      %h1 Upload File
+      = button_to new_product_path, method: 'get', class: "btn btn-success" do
+        %span.glyphicon.glyphicon-plus
+      %br/
+      .table-responsive
+        %table#mytable.table.table-bordred.table-striped{:style => "background-color:#d9e4ff"}
+          %thead
+            %th
+              %input#checkall{:type => "checkbox"}/
+            %th Name
+            %th Description
+            %th Date
+            %th File
+            %th View
+            %th Edit
+            %th Delete
+          - @products.each do |product|
+            %tbody
+              %tr
+                %td
+                  %input.checkthis{:type => "checkbox"}/
+                %td
+                  = product.title
+                %td{:style => "width: 100px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"}= product.description
+                %td= product.date
+                %td= product.file
+                %td
+                  = link_to product_path(product),:class => "btn btn-danger btn-xs" do
+                    %span.glyphicon.glyphicon-zoom-in
+                %td
+                  %p{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Edit"}
+                    %button.btn.btn-primary.btn-xs{"data-target" => "#edit", "data-title" => "Edit", "data-toggle" => "modal"}
+                      %span.glyphicon.glyphicon-edit
+                %td
+                  = link_to product_path(product), :method => :delete, :class => "btn btn-danger btn-xs", data: {confirm: "Are you sure?"}  do
+                    %span.glyphicon.glyphicon-trash
+        .clearfix
+        %ul.pagination.pull-right
+          %li.disabled
+            %a{:href => "#"}
+              %span.glyphicon.glyphicon-chevron-left
+          %li.active
+            %a{:href => "#"} 1
+          %li
+            %a{:href => "#"} 2
+          %li
+            %a{:href => "#"} 3
+          %li
+            %a{:href => "#"} 4
+          %li
+            %a{:href => "#"} 5
+          %li
+            %a{:href => "#"}
+              %span.glyphicon.glyphicon-chevron-right
+  #edit.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "edit", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+            %span.glyphicon.glyphicon-remove{"aria-hidden" => "true"}
+          %h4#Heading.modal-title.custom_align Edit Your Detail
+        .modal-body
+          .form-group
+            %input.form-control{:placeholder => "Enter title", :type => "text"}/
+          .form-group
+            %textarea.form-control{:placeholder => "Enter description", :rows => "2"}
+          .form-group
+            %input.form-control{:placeholder => "Enter", :type => "text"}/
+          .form-control
+        .modal-footer
+          %button.btn.btn-warning.btn-lg{:style => "width: 100%;", :type => "button"} Update
+  

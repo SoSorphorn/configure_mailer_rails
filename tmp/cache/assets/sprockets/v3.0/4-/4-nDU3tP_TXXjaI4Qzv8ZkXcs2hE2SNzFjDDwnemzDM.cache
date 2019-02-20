@@ -1,0 +1,16 @@
+I"(function() {
+  ConfigureMailer.ProductsIndex = (function() {
+    var _alertHello, _init;
+    _init = function() {
+      return _alertHello();
+    };
+    _alertHello = function() {
+      return alert('hello');
+    };
+    return {
+      init: _init
+    };
+  })();
+
+}).call(this);
+:ET

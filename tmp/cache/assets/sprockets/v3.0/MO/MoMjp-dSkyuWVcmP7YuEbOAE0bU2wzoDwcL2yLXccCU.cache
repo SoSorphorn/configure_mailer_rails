@@ -1,0 +1,32 @@
+I"](function() {
+  ConfigureMailer.Initializer = {
+    exec: function(pageName) {
+      if (pageName && ConfigureMailer[pageName]) {
+        return ConfigureMailer[pageName]['init']();
+      }
+    },
+    currentPage: function() {
+      var action, bodyId, controller;
+      if (!$('body').attr('id')) {
+        return '';
+      }
+      bodyId = $('body').attr('id').split('-');
+      action = ConfigureMailer.Util.capitalize(bodyId[1]);
+      controller = ConfigureMailer.Util.capitalize(bodyId[0]);
+      return controller + action;
+    },
+    init: function() {
+      ConfigureMailer.Initializer.exec('Common');
+      if (this.currentPage()) {
+        ConfigureMailer.Initializer.exec(this.currentPage());
+        debugger;
+      }
+    }
+  };
+
+  $(document).on('ready page:load', function() {
+    return ConfigureMailer.Initializer.init();
+  });
+
+}).call(this);
+:ET

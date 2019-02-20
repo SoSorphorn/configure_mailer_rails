@@ -1,0 +1,5 @@
+I"B(function() {
+  window.ConfigureMailer = {};
+
+}).call(this);
+:ET

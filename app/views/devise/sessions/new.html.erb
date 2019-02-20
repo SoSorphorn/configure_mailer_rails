@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Daily UI - Day 1 Sign In</title>
+
+  <!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+</head>
+  <div class="container-fluid" id="login" >
+    <div class="login-box animated fadeInUp">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f| %>
+      <div class="box-header">
+        <h2>Log In</h2>
+      </div>
+      <label for="email">Email</label>
+      <br/>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', id: 'email',style: "margin:auto;width:80%;border-radius:5px" %>
+      <br/>
+      <label for="password">Password</label>
+      <br/>
+       <%= f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'password',style: "margin:auto;width:80%;border-radius:5px" %>
+      <br/>
+      <% if devise_mapping.rememberable? %>
+        <div class="checkbox">
+          <%= f.label :remember_me do %>
+            <%= f.check_box :remember_me %> <%= t('.remember_me', default: 'Remember me') %>
+          <% end %>
+        </div>
+      <% end %>
+      <br/>
+        <%= f.submit  t('.sign_in', default: 'Sign in'), class: 'btn btn-primary' , style: "color:white" %>
+      <br/>
+      <%= render 'devise/shared/links' %>
+      <% end %>
+      <%= bootstrap_flash %>
+    </div>
+  </div>
+
+
+<script>
+  $(document).ready(function () {
+      $('#logo').addClass('animated fadeInDown');
+      $("input:text:visible:first").focus();
+  });
+  $('#username').focus(function() {
+    $('label[for="email"]').addClass('selected');
+  });
+  $('#username').blur(function() {
+    $('label[for="email"]').removeClass('selected');
+  });
+  $('#password').focus(function() {
+    $('label[for="password"]').addClass('selected');
+  });
+  $('#password').blur(function() {
+    $('label[for="password"]').removeClass('selected');
+  });
+</script>
+
+</html>
